@@ -1,0 +1,77 @@
+.full-body-program-container {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 800px;
+    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.day-selector {
+    margin-bottom: 20px;
+}
+
+.day-selector label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+
+.day-selector select {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+
+.exercise-row {
+    background-color: #282828;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sets-reps {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+input {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 60px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-save {
+    background-color: #6a5acd;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-save:hover {
+    background-color: #483d8b;
+    transform: scale(1.05);
+}
