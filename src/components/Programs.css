@@ -1,21 +1,11 @@
-
 .full-body-program-wrapper {
     display: flex;
     flex-direction: row;
     min-height: 100vh;
-    background-color: grey;
+    background-color: gray;
     padding: 40px;
     align-items: flex-start;
     padding-top: 50px;
-}
-
-.program-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-top: 100px;
-    text-align: center;
-    color: white;
 }
 
 
@@ -24,11 +14,11 @@
     background-color: #f39c12;
     color: white;
     padding: 20px;
-    padding-top: 10px; 
+    padding-top: 10px;
     border-radius: 10px;
     margin-right: 20px;
     position: sticky;
-    top: 50px; 
+    top: 50px;
 }
 
 .sidebar h3 {
