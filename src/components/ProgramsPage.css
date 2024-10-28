@@ -6,6 +6,7 @@
     min-height: 100vh;
     background-color: #2c2c2c;
     color: #ffffff;
+    text-align: center;
 }
 
 h1 {
@@ -28,10 +29,11 @@ h1 {
     border-radius: 10px;
     font-weight: bold;
     font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    width: 200px;
-    text-align: center;
+    width: 250px;
 }
 
 .program-button:hover {

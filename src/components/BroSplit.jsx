@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Programs.css';
+import './PPL.css';
 
 const workoutPlan = {
     chest: [
@@ -44,23 +44,23 @@ function BroSplit() {
         localStorage.setItem('broSplitLogs', JSON.stringify(logs));
         alert("Workout logged successfully!");
     };
-   
 
     return (
-        <div className="full-body-program-wrapper">
-            <div className="sidebar">
-                <h3>Workout Tips</h3>
+        <div className="ppl-page-container"> 
+            <div className="workout-tips"> 
+                <h2>Workout Tips</h2>
                 <ul>
                     <li>Focus on progressive overload for muscle growth.</li>
                     <li>Take 60-90 seconds of rest between sets.</li>
-                    <li>Make sure to use full range of motion for every exercise, pausing for 1 sec at the stretch position</li>
-                    <li>Control the eccentric(lowering) phase of the exercise</li>
+                    <li>Use full range of motion for every exercise.</li>
+                    <li>Control the eccentric (lowering) phase of each exercise.</li>
                     <li>Maintain proper form to avoid injuries.</li>
                 </ul>
             </div>
 
-            <div className="program-container">
+            <div className="ppl-program-content"> 
                 <h1>Bro Split Program - Day: {day.charAt(0).toUpperCase() + day.slice(1)}</h1>
+
                 <div className="day-selector">
                     <label>Choose Day:</label>
                     <select value={day} onChange={(e) => setDay(e.target.value)}>
@@ -101,7 +101,6 @@ function BroSplit() {
             </div>
         </div>
     );
-
 }
 
 export default BroSplit;

@@ -42,9 +42,8 @@ function FullBodyProgram() {
     };
 
     return (
-        <div className="full-body-program-wrapper">
-
-            <div className="sidebar">
+        <div className="full-body-page-container">
+            <div className="workout-tips">
                 <h3>Workout Tips</h3>
                 <ul>
                     <li>Focus on controlled, full-range movements.</li>
@@ -55,57 +54,47 @@ function FullBodyProgram() {
                 </ul>
             </div>
 
-            <div style={{
-                paddingTop: '7vh',
-                paddingBottom: '30px',
-                textAlign: 'center',
-                width: '100%',
-                maxWidth: '1200px',
-                margin: '0 auto',
-            }}>
+            <div className="ppl-program-content">
+                <h1 className="program-title" style={{ color: 'white' }}> Full Body Program - Day: {day === 'dayA' ? 'A' : day === 'dayB' ? 'B' : 'C'}</h1>
 
-            <div className="full-body-program-container">
-                    <h1 className="program-title" style={{ color: 'white' }}> Full Body Program - Day: {day === 'dayA' ? 'A' : day === 'dayB' ? 'B' : 'C'}</h1>
+            <div className="day-selector">
+                <label>Choose Day:</label>
+                <select value={day} onChange={(e) => setDay(e.target.value)}>
+                    <option value="dayA">Day A</option>
+                    <option value="dayB">Day B</option>
+                    <option value="dayC">Day C</option>
+                </select>
+            </div>
 
-                <div className="day-selector">
-                    <label>Choose Day:</label>
-                    <select value={day} onChange={(e) => setDay(e.target.value)}>
-                        <option value="dayA">Day A</option>
-                        <option value="dayB">Day B</option>
-                        <option value="dayC">Day C</option>
-                    </select>
-                </div>
-
-                <div className="exercise-grid">
-                    {workoutPlan[day].map((exercise, index) => (
-                        <div key={index} className="exercise-row">
+            <div className="exercise-grid">
+                {workoutPlan[day].map((exercise, index) => (
+                    <div key={index} className="exercise-row">
+                        <label>
+                            Exercise:
+                            <select onChange={(e) => handleLogChange(exercise.name, 'exercise', e.target.value)}>
+                                <option value={exercise.name}>{exercise.name}</option>
+                                {exercise.alternatives.map((alt, i) => (
+                                    <option key={i} value={alt}>{alt}</option>
+                                ))}
+                            </select>
+                        </label>
+                        <div className="sets-reps">
+                            <label>Sets: {exercise.sets}</label>
+                            <label>Reps: {exercise.reps}</label>
                             <label>
-                                Exercise:
-                                <select onChange={(e) => handleLogChange(exercise.name, 'exercise', e.target.value)}>
-                                    <option value={exercise.name}>{exercise.name}</option>
-                                    {exercise.alternatives.map((alt, i) => (
-                                        <option key={i} value={alt}>{alt}</option>
-                                    ))}
-                                </select>
+                                Sets Performed:
+                                <input type="number" onChange={(e) => handleLogChange(exercise.name, 'sets', e.target.value)} />
                             </label>
-                            <div className="sets-reps">
-                                <label>Sets: {exercise.sets}</label>
-                                <label>Reps: {exercise.reps}</label>
-                                <label>
-                                    Sets Performed:
-                                    <input type="number" onChange={(e) => handleLogChange(exercise.name, 'sets', e.target.value)} />
-                                </label>
-                                <label>
-                                    Reps Performed:
-                                    <input type="number" onChange={(e) => handleLogChange(exercise.name, 'reps', e.target.value)} />
-                                </label>
-                            </div>
+                            <label>
+                                Reps Performed:
+                                <input type="number" onChange={(e) => handleLogChange(exercise.name, 'reps', e.target.value)} />
+                            </label>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
+            </div>
 
-                    <button onClick={saveLog} className="btn-save">Log Workout</button>
-                </div>
+                <button onClick={saveLog} className="btn-save">Log Workout</button>
             </div>
         </div>
     );

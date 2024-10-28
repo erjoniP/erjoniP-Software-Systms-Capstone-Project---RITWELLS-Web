@@ -1,62 +1,50 @@
-.movement-snack-program-container {
-    text-align: center;
-    margin: 50px auto;
+.ppl-page-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #2c2c2c;
+    color: #ffffff;
+    padding: 40px;
+    overflow: hidden;
+    margin-top: 130px;
+}
+
+.workout-tips {
+    width: 250px;
+    background-color: #ffa500;
+    padding: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.ppl-program-content {
+    flex: 1;
     max-width: 800px;
-    background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
-    padding: 30px;
+    background-color: #3a3a3a;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: white;
-}
-
-.snack-selector {
-    margin-bottom: 20px;
-}
-
-.snack-selector label {
-    font-size: 1.2rem;
-    margin-right: 10px;
-}
-
-.snack-selector select {
-    padding: 5px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: none;
 }
 
 .exercise-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
-}
-
-
-.exercise-row {
-    background-color: #282828;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.sets-reps {
-    margin-top: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 20px;
 }
 
-input {
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    width: 80px;
+.exercise-row {
+    background-color: #333;
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-select {
-    padding: 8px;
-    border-radius: 5px;
-    width: 100%;
+.sets-reps {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
 }
 
 .btn-save {
@@ -70,7 +58,7 @@ select {
     margin-top: 20px;
 }
 
-.btn-save:hover {
-    background-color: #483d8b;
-    transform: scale(1.05);
-}
+    .btn-save:hover {
+        background-color: #483d8b;
+        transform: scale(1.05);
+    }

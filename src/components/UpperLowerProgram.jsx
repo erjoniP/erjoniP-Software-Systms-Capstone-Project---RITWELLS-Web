@@ -35,8 +35,8 @@ function UpperLowerProgram() {
     };
 
     return (
-        <div className="full-body-program-wrapper">
-            <div className="sidebar">
+        <div className="full-body-page-container">
+            <div className="workout-tips">
                 <h3>Workout Tips</h3>
                 <ul>
                     <li>Focus on progressive overload for muscle growth.</li>
@@ -46,16 +46,8 @@ function UpperLowerProgram() {
                     <li>Maintain proper form to avoid injuries.</li>
                 </ul>
             </div>
-            <div style={{
-                paddingTop: '7vh',
-                paddingBottom: '30px',
-                textAlign: 'center',
-                width: '100%',
-                maxWidth: '1200px',
-                margin: '0 auto',
-            }}>
 
-            <div className="program-container">
+            <div className="ppl-program-content">
                 <h1 className="program-title">Upper/Lower Split Program - Day: {day === 'upper' ? 'Upper Body' : 'Lower Body'}</h1>
             <div className="day-selector">
                 <label>Choose Day:</label>
@@ -95,7 +87,6 @@ function UpperLowerProgram() {
             </div>
                 
             </div>
-        </div>
     );
 }
 
