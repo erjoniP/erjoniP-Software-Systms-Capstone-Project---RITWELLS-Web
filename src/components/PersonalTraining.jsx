@@ -1,6 +1,23 @@
 import React from 'react';
+import johnProfile from '../assets/dynamic-male-fitness-trainer-ai-generated_921479-36106.jpg';
+import janeProfile from '../assets/energetic-female-fitness-trainer-ai-generated_921479-36045.jpg';
 
 function PersonalTraining() {
+    const coaches = [
+        {
+            name: 'John Doe',
+            profilePic: johnProfile, 
+            contact: 'johndoe@example.com',
+            bio: 'John is a certified personal trainer with 10 years of experience specializing in strength training and nutrition.'
+        },
+        {
+            name: 'Jane Smith',
+            profilePic: janeProfile, 
+            contact: 'janesmith@example.com',
+            bio: 'Jane is an experienced fitness coach focusing on high-intensity interval training (HIIT) and functional fitness for all levels.'
+        }
+    ];
+
     return (
         <div style={{
             position: 'absolute',
@@ -15,16 +32,33 @@ function PersonalTraining() {
             borderRadius: '10px',
             boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)'
         }}>
-            <h1 style={{ color: '#fff' }}>Personal Training Programs</h1>
-            <p style={{ color: '#fff' }}>
-                Explore our wide variety of personalized workout programs tailored to your fitness goals.
-            </p>
-            <ul style={{ color: '#fff', listStyleType: 'none', padding: 0 }}>
-                <li>1. Bro Split Program</li>
-                <li>2. Push/Pull/Legs Program</li>
-                <li>3. Upper/Lower Split Program</li>
-                <li>4. Full Body Program</li>
-            </ul>
+            <h1 style={{ color: '#fff', marginBottom: '20px' }}>Choose Your Personal Trainer</h1>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '30px'
+            }}>
+                {coaches.map((coach, index) => (
+                    <div key={index} style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        backgroundColor: '#333',
+                        padding: '20px',
+                        borderRadius: '10px',
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'
+                    }}>
+                        <img
+                            src={coach.profilePic}
+                            alt={`${coach.name}'s profile`}
+                            style={{ borderRadius: '50%', width: '150px', height: '150px', objectFit: 'cover', marginBottom: '15px' }}
+                        />
+                        <h2 style={{ color: '#fff' }}>{coach.name}</h2>
+                        <p style={{ color: '#bbb' }}><strong>Contact:</strong> {coach.contact}</p>
+                        <p style={{ color: '#fff', textAlign: 'center', maxWidth: '600px' }}>{coach.bio}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
