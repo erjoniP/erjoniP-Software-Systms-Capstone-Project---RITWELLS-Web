@@ -11,13 +11,18 @@ import PPLProgram from './components/PPL.jsx';
 import UpperLowerProgram from './components/UpperLowerProgram.jsx';
 import FullBodyProgram from './components/FullBodyProgram.jsx';
 import PersonalTraining from './components/PersonalTraining.jsx';
-import ProgramsPage from './components/ProgramsPage';
+import ProgramsPage from './components/ProgramsPage.jsx';
+import Register from './components/Register.jsx';
+import Login from './components/Login.jsx';
+import Profile from './components/Profile.jsx';
+import Navbar from './components/Navbar.jsx';
 import './App.css';
 
 
 function App() {
     return (
         <Router>
+            <Navbar /> 
             <div className="App">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -32,6 +37,9 @@ function App() {
                     <Route path="/movement-snack" element={<MovementSnackPage />} />
                     <Route path="/personal-training" element={<PersonalTraining />} />
                     <Route path="/programs-page" element={<ProgramsPage />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </div>
         </Router>
