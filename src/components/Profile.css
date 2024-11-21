@@ -1,0 +1,71 @@
+/* Container for the Profile page */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+/* Inner box styling */
+.profile-box {
+    background-color: #1c1c1c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 320px;
+}
+
+/* Profile header */
+.profile-box h2 {
+    margin-bottom: 20px;
+}
+
+/* Input field styling */
+.profile-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+.profile-box button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.profile-box button:first-of-type {
+    background-color: #6a5acd;
+    color: white;
+}
+
+.profile-box button:first-of-type:hover {
+    background-color: #483d8b;
+}
+
+.profile-box button:last-of-type {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.profile-box button:last-of-type:hover {
+    background-color: #cc3a3a;
+}
+
+/* Error message styling */
+.profile-error {
+    color: red;
+    margin-top: 10px;
+}

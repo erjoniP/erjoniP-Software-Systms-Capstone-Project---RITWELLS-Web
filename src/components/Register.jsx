@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { auth, firestore } from './firebaseConfig';
+import { auth } from './firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore'; 
+import { firestore } from './firebaseConfig';
 import './Register.css';
 
 function Register() {
@@ -12,13 +14,16 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            console.log("Registering with:", email, password);
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log("User registered:", userCredential.user.uid);
-            await firestore.collection('users').doc(userCredential.user.uid).set({
-                name: name,
-                email: email,
+            const user = userCredential.user;
+
+            const userDocRef = doc(firestore, 'users', user.uid);
+            await setDoc(userDocRef, {
+                Name: name,
+                Email: email,
             });
+            
+            console.log("User data successfully written to Firestore.");
         } catch (err) {
             setError(err.message);
         }

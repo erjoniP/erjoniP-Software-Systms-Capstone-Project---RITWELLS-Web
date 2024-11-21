@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { auth, firestore } from './firebaseConfig';
+import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
 
 function Profile() {
     const [user, setUser] = useState(null);
@@ -8,15 +9,24 @@ function Profile() {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const user = auth.currentUser;
-            if (user) {
-                const userDoc = await firestore.collection('users').doc(user.uid).get();
-                if (userDoc.exists) {
-                    setUser(userDoc.data());
-                    setName(userDoc.data().name);
+            try {
+                const currentUser = auth.currentUser;
+                if (currentUser) {
+                    const userDocRef = doc(firestore, 'users', currentUser.uid);
+                    const userDoc = await getDoc(userDocRef);
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        setUser(userData);
+                        setName(userData.Name || '');
+                    } else {
+                        setError('User document not found.');
+                    }
                 }
+            } catch (err) {
+                setError('Failed to fetch user data.');
             }
         };
+
         fetchUserData();
     }, []);
 
@@ -26,11 +36,23 @@ function Profile() {
 
     const handleUpdate = async () => {
         try {
-            const user = auth.currentUser;
-            await firestore.collection('users').doc(user.uid).update({ name });
-            setUser({ ...user, name });
+            const currentUser = auth.currentUser;
+            if (!currentUser) {
+                setError('No user is currently logged in.');
+                return;
+            }
+
+            const userRef = doc(firestore, 'users', currentUser.uid);
+            const userDoc = await getDoc(userRef);
+
+            if (userDoc.exists()) {
+                const updatedUserData = userDoc.data();
+                setUser(updatedUserData); 
+            }
+
+            alert('Name updated successfully!');
         } catch (err) {
-            setError(err.message);
+            setError(`Error updating name: ${err.message}`);
         }
     };
 
@@ -38,12 +60,38 @@ function Profile() {
 
     return (
         <div>
-            <h2>Profile</h2>
-            <p>Email: {user.email}</p>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            <button onClick={handleUpdate}>Update Name</button>
-            <button onClick={handleLogout}>Logout</button>
-            {error && <p>{error}</p>}
+            <div style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                textAlign: 'center',
+                width: '100%',
+                maxWidth: '1200px',
+                padding: '30px',
+                borderRadius: '10px',
+
+            }}>
+            <div className="profile-container">
+                <div className="profile-box">
+                    <h2>Profile</h2>
+                    {user && user.Email ? (
+                        <p>Email: {user.Email}</p>
+                    ) : (
+                        <p>Email: {auth.currentUser ? auth.currentUser.email : 'Loading...'}</p>
+                    )}
+                    <input
+                        type="text"
+                        value={name}
+                        placeholder="Update Name"
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <button onClick={handleUpdate}>Update Name</button>
+                    <button onClick={handleLogout}>Logout</button>
+                    {error && <p className="profile-error">{error}</p>}
+                </div>
+                </div>
+            </div>
         </div>
     );
 }
