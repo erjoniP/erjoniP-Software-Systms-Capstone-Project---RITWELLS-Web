@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { auth } from './firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'; 
 import { firestore } from './firebaseConfig';
@@ -10,6 +11,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -24,6 +26,7 @@ function Register() {
             });
             
             console.log("User data successfully written to Firestore.");
+            navigate('/')
         } catch (err) {
             setError(err.message);
         }

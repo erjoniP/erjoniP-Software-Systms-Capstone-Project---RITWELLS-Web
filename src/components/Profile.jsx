@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { auth, firestore } from './firebaseConfig';
+import { useNavigate } from 'react-router-dom';
 import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import './Profile.css';
 
 function Profile() {
     const [user, setUser] = useState(null);
     const [name, setName] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -32,6 +35,7 @@ function Profile() {
 
     const handleLogout = () => {
         auth.signOut();
+        navigate('/')
     };
 
     const handleUpdate = async () => {
@@ -72,24 +76,30 @@ function Profile() {
                 borderRadius: '10px',
 
             }}>
-            <div className="profile-container">
-                <div className="profile-box">
-                    <h2>Profile</h2>
-                    {user && user.Email ? (
-                        <p>Email: {user.Email}</p>
-                    ) : (
-                        <p>Email: {auth.currentUser ? auth.currentUser.email : 'Loading...'}</p>
-                    )}
-                    <input
-                        type="text"
-                        value={name}
-                        placeholder="Update Name"
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <button onClick={handleUpdate}>Update Name</button>
-                    <button onClick={handleLogout}>Logout</button>
-                    {error && <p className="profile-error">{error}</p>}
-                </div>
+                <div className="profile-container">
+                    <div className="profile-box">
+                        <h2>Profile</h2>
+                        {user && user.Email ? (
+                            <p>Email: {user.Email}</p>
+                        ) : (
+                            <p>Email: {auth.currentUser ? auth.currentUser.email : 'Loading...'}</p>
+                        )}
+                        <input
+                            type="text"
+                            value={name}
+                            placeholder="Update Name"
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <div className="button-container">
+                            <button className="update-btn" onClick={handleUpdate}>
+                                Update Name
+                            </button>
+                            <button className="logout-btn" onClick={handleLogout}>
+                                Logout
+                            </button>
+                        </div>
+                        {error && <p className="profile-error">{error}</p>}
+                    </div>
                 </div>
             </div>
         </div>
