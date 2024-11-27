@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { auth, firestore } from './firebaseConfig';
+import { doc, setDoc, updateDoc, arrayUnion, collection, addDoc} from 'firebase/firestore';
 import './UpperLowerProgram.css';
 
 const workoutPlan = {
@@ -29,9 +31,28 @@ function UpperLowerProgram() {
         }));
     };
 
-    const saveLog = () => {
-        localStorage.setItem('upperLowerProgramLogs', JSON.stringify(logs));
-        alert("Workout logged successfully!");
+    const saveLog = async () => {
+        const user = auth.currentUser;
+
+        if (!user) {
+            alert('You must be logged in to log workouts.');
+            return;
+        }
+        const userWorkoutCollectionRef = collection(firestore, 'users', user.uid, 'workouts');
+            try {
+            
+            await addDoc(userWorkoutCollectionRef, {
+                date: new Date().toISOString(),
+                day: day,
+                exercises: logs,
+            });
+
+            alert('Workout logged successfully!');
+            console.log('Workout saved:', logs);
+        } catch (error) {
+            console.error('Error saving workout:', error);
+            alert('Failed to log workout. Please try again.');
+        }
     };
 
     return (

@@ -6,6 +6,7 @@ import './ProgramsPage.css';
 function ProgramsPage() {
     return (
         <div style={{
+            marginTop: '60px',
             position: 'absolute',
             left: '50%',
             top: '50%',

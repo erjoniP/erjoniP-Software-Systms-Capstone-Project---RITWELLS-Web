@@ -31,8 +31,19 @@ function PPLProgram() {
     };
 
     const saveLog = () => {
-        localStorage.setItem('pplProgramLogs', JSON.stringify(logs));
-        alert("Workout logged successfully!");
+        const existingLogs = JSON.parse(localStorage.getItem('upperLowerProgramLogs')) || {};
+
+        const updatedLogs = {
+            ...existingLogs,
+            [day]: {
+                ...(existingLogs[day] || {}),
+                ...logs,
+            },
+        };
+
+        localStorage.setItem('upperLowerProgramLogs', JSON.stringify(updatedLogs));
+        alert('Workout logged successfully!');
+        console.log('Workout logged:', updatedLogs);
     };
 
     return (

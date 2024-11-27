@@ -5,10 +5,12 @@ import service1Image from '../assets/woman-doing-workout-gym-with-trainer.jpg';
 import service2Image from '../assets/woman-helping-man-gym.jpg';
 import service3Image from '../assets/real-food-pyramid-assortment-top-view.jpg';
 import service4Image from '../assets/weights-1024x576.jpeg';
+
 function ServicesPage() {
     return (
         <div style={{
             position: 'absolute',
+            marginTop: '50px',
             left: '50%',
             top: '50%',
             transform: 'translate(-50%, -50%)',

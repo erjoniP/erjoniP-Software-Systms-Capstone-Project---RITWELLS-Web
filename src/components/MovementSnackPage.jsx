@@ -32,8 +32,19 @@ function MovementSnackPage() {
     };
 
     const saveLog = () => {
-        localStorage.setItem('movementSnackLogs', JSON.stringify(logs));
-        alert("Movement snack logged successfully!");
+        const existingLogs = JSON.parse(localStorage.getItem('upperLowerProgramLogs')) || {};
+
+        const updatedLogs = {
+            ...existingLogs,
+            [day]: {
+                ...(existingLogs[day] || {}),
+                ...logs,
+            },
+        };
+
+        localStorage.setItem('upperLowerProgramLogs', JSON.stringify(updatedLogs));
+        alert('Workout logged successfully!');
+        console.log('Workout logged:', updatedLogs);
     };
 
     return (
