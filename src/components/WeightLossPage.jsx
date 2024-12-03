@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { auth, firestore } from './firebaseConfig';
+import { doc, setDoc, updateDoc, arrayUnion, collection, addDoc } from 'firebase/firestore';
 import "./WeightLossProgram.css"
 
 
@@ -36,6 +38,7 @@ const workoutPlan = {
 function WeightLossPage() {
     const [day, setDay] = useState('day1');
     const [logs, setLogs] = useState({});
+    const [programName] = useState('Weight Loss Program');
 
     const handleLogChange = (exerciseName, type, value) => {
         setLogs(prev => ({
@@ -44,20 +47,29 @@ function WeightLossPage() {
         }));
     };
 
-    const saveLog = () => {
-        const existingLogs = JSON.parse(localStorage.getItem('upperLowerProgramLogs')) || {};
+    const saveLog = async () => {
+        const user = auth.currentUser;
 
-        const updatedLogs = {
-            ...existingLogs,
-            [day]: {
-                ...(existingLogs[day] || {}),
-                ...logs,
-            },
-        };
+        if (!user) {
+            alert('You must be logged in to log workouts.');
+            return;
+        }
+        const userWorkoutCollectionRef = collection(firestore, 'users', user.uid, 'workouts');
+        try {
 
-        localStorage.setItem('upperLowerProgramLogs', JSON.stringify(updatedLogs));
-        alert('Workout logged successfully!');
-        console.log('Workout logged:', updatedLogs);
+            await addDoc(userWorkoutCollectionRef, {
+                date: new Date().toISOString(),
+                day: day,
+                exercises: logs,
+                programName: programName,
+            });
+
+            alert('Workout logged successfully!');
+            console.log('Workout saved:', logs);
+        } catch (error) {
+            console.error('Error saving workout:', error);
+            alert('Failed to log workout. Please try again.');
+        }
     };
 
     return (

@@ -16,6 +16,7 @@ import Register from './components/Register.jsx';
 import Login from './components/Login.jsx';
 import Profile from './components/Profile.jsx';
 import Navbar from './components/Navbar.jsx';
+import Chatbot from './components/Chatbot.jsx'
 import './App.css';
 
 
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/profile" element={<Profile />} />
                 </Routes>
+                <Chatbot /> 
             </div>
         </Router>
     );

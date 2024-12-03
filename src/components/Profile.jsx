@@ -112,8 +112,9 @@ function Profile() {
                         </div>
                         {error && <p className="profile-error">{error}</p>}
                     </div>
-                    <div className="workout-log">
+                    <div className="workout-log-container">
                         <h3>Your Workouts</h3>
+                        <div className="workout-log">
                         {workouts.length > 0 ? (
                             workouts.map((log, index) => (
                                 <div key={index} className="workout-log-item">
@@ -130,7 +131,8 @@ function Profile() {
                             ))
                         ) : (
                             <p>No workouts logged yet.</p>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
