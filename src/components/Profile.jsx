@@ -76,18 +76,7 @@ function Profile() {
 
     return (
         <div>
-            <div style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                textAlign: 'center',
-                width: '100%',
-                maxWidth: '1200px',
-                padding: '30px',
-                borderRadius: '10px',
-
-            }}>
+            <div className="profile-wrapper">
                 <div className="profile-container">
                     <div className="profile-box">
                         <h2>Profile</h2>

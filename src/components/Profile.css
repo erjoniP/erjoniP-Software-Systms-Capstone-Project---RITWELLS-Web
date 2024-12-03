@@ -1,13 +1,28 @@
+
+.profile-wrapper {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0;
+    margin-top: 40px;
+    max-height: calc(100vh - 60px);
+    padding: 20px;
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: 78vh;
+}
+
+
 .profile-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 100px; /* Adjust to account for the navbar height */
-    height: auto; /* Automatically adjusts to content height */
-    min-height: 200vh;
+    height: auto;
     color: white;
     text-align: center;
+ 
 }
 
 .profile-box {
@@ -17,6 +32,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     width: 320px;
     margin-bottom: 20px;
+    
 }
 
 .profile-box h2 {
