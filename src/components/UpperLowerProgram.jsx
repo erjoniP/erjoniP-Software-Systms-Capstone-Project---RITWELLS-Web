@@ -23,6 +23,7 @@ const workoutPlan = {
 function UpperLowerProgram() {
     const [day, setDay] = useState('upper');
     const [logs, setLogs] = useState({});
+    const [programName] = useState('Upper Lower Split Program');
 
     const handleLogChange = (exerciseName, type, value) => {
         setLogs(prev => ({
@@ -45,6 +46,7 @@ function UpperLowerProgram() {
                 date: new Date().toISOString(),
                 day: day,
                 exercises: logs,
+                programName: programName,
             });
 
             alert('Workout logged successfully!');

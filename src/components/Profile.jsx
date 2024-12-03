@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { auth, firestore } from './firebaseConfig';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
 import './Profile.css';
 
 function Profile() {
     const [user, setUser] = useState(null);
     const [name, setName] = useState('');
     const [error, setError] = useState('');
+    const [workouts, setWorkouts] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -24,8 +25,18 @@ function Profile() {
                     } else {
                         setError('User document not found.');
                     }
+
+                    const workoutsRef = collection(firestore, 'users', currentUser.uid, 'workouts');
+                    const workoutsSnapshot = await getDocs(workoutsRef);
+                    const workoutsList = workoutsSnapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        ...doc.data(),
+                    }));
+
+                    setWorkouts(workoutsList);
                 }
             } catch (err) {
+                console.error('Error fetching user data:', err);
                 setError('Failed to fetch user data.');
             }
         };
@@ -47,6 +58,7 @@ function Profile() {
             }
 
             const userRef = doc(firestore, 'users', currentUser.uid);
+            await updateDoc(userRef, { Name: name });
             const userDoc = await getDoc(userRef);
 
             if (userDoc.exists()) {
@@ -99,6 +111,26 @@ function Profile() {
                             </button>
                         </div>
                         {error && <p className="profile-error">{error}</p>}
+                    </div>
+                    <div className="workout-log">
+                        <h3>Your Workouts</h3>
+                        {workouts.length > 0 ? (
+                            workouts.map((log, index) => (
+                                <div key={index} className="workout-log-item">
+                                    <h4>{log.programName}</h4>
+                                    <p>Date: {new Date(log.date).toLocaleDateString()}</p>
+                                    <ul>
+                                        {Object.entries(log.exercises).map(([exercise, details], idx) => (
+                                            <li key={idx}>
+                                                {exercise}: {details.sets} sets, {details.reps} reps
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No workouts logged yet.</p>
+                        )}
                     </div>
                 </div>
             </div>
